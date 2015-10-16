@@ -7,9 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-@class YLContactsViewController;
+//@class YLContactsViewControlleri;
+@class YLContact;
+@protocol addContactsViewControllerDelegate  <NSObject>
+
+- (void)addcontact:(YLContact *)contact;
+
+@optional
+
+@end
 @interface YLaddContactsViewController : UIViewController
 
-/**    weal*/
-@property (nonatomic, weak)YLContactsViewController  *yacvc;
+/**    delegate*/
+@property (nonatomic, strong)id<addContactsViewControllerDelegate> delegate;
+
+
 @end

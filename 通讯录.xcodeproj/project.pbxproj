@@ -172,6 +172,7 @@
 		DA2D607C1BCFF70900A18E13 /* add添加联系人 */ = {
 			isa = PBXGroup;
 			children = (
+				DA7C49591BD1229C0070FE06 /* Model */,
 				DA2D60821BCFFA0200A18E13 /* View */,
 				DA2D60801BCFF9F200A18E13 /* Controller */,
 			);
@@ -206,6 +207,13 @@
 			children = (
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		DA7C49591BD1229C0070FE06 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

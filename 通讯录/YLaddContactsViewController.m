@@ -8,7 +8,7 @@
 
 #import "YLaddContactsViewController.h"
 #import "YLContact.h"
-#import "YLContactsViewController.h"
+//#import "YLContactsViewController.h"
 @interface YLaddContactsViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *addName;
 @property (weak, nonatomic) IBOutlet UIButton *addBtn;
@@ -39,6 +39,10 @@
     
     self.yacvc.contact = contact;
     
+    if([self.delegate respondsToSelector:@selector(addcontact:)]){
+        [self.delegate addcontact:contact];
+    }
+        
     [self.navigationController popViewControllerAnimated:YES];
 }
 

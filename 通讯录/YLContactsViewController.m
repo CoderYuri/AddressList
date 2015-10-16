@@ -9,7 +9,7 @@
 #import "YLContactsViewController.h"
 #import "YLContact.h"
 #import "YLaddContactsViewController.h"
-@interface YLContactsViewController () <UIActionSheetDelegate>
+@interface YLContactsViewController () <UIActionSheetDelegate,addContactsViewControllerDelegate>
 
 /**    array*/
 @property (nonatomic, strong)NSMutableArray *contactArray;
@@ -60,27 +60,44 @@
     }
 }
 
-- (void)setContact:(YLContact *)contact{
-    _contact = contact;
-    NSLog(@"%@",self.contact.name);
-}
+//- (void)setContact:(YLContact *)contact{
+//    _contact = contact;
+//    NSLog(@"%@",self.contact.name);
+//    [self.tableView reloadData];
+//}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     YLaddContactsViewController *vc = segue.destinationViewController;
-    vc.yacvc = self;
-//    self = vc.yacvc;
+//    vc.yacvc = self;
+    vc.delegate = self;
+
 //    NSLog(@"%@",self.contact.name);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+- (void)addcontact:(YLContact *)contact{
+//名字相同 不循允许入
+    for (YLContact *con in _contactArray) {
+        if([contact.name isEqualToString:con.name] )
+            return;
+    }
+    
+   [_contactArray addObject:contact];
+    [self.tableView reloadData];
+}
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.contactArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ID = @"ni";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    cell.textLabel.text = _contact.name;
-//    cell.detailTextLabel.text = _contact.number;
+    YLContact *contact = self.contactArray[indexPath.row];
+//    NSLog(@"nihao");
+    cell.textLabel.text = contact.name;
+    cell.detailTextLabel.text = contact.number;
     return cell;
 }
 
